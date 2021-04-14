@@ -38,7 +38,7 @@ for (let i = 0; i < biciclette.length; i++){
     }
     
 }
-console.log(biciclettaPiuLeggera);
+console.log('bicicletta piu leggera:', biciclettaPiuLeggera);
 
 //destrutturo oggetto biciclettaPiuLeggera
 
@@ -66,7 +66,6 @@ document.getElementById('bicicletta').innerHTML= caratteristicheDaStampare;
 
 
 
-
 //ES.2 
 //Creare un array di oggetti di squadre di calcio. 
 //Ogni squadra avrà diverse proprietà: nome, punti fatti, falli subiti. 
@@ -74,3 +73,105 @@ document.getElementById('bicicletta').innerHTML= caratteristicheDaStampare;
 //Generare numeri random al posto degli 0 nelle proprietà: Punti fatti e falli subiti. 
 //Infine usando la destrutturazione creiamo un nuovo array i cui elementi contengono solo nomi e falli subiti 
 //stampiamo tutto in console.
+
+const squadre = [
+    {
+        nome: 'Roma',
+        punti_fatti: 0,
+        falli_subiti: 0
+    },
+    {
+        nome: 'Milan',
+        punti_fatti: 0,
+        falli_subiti: 0
+    },
+    {
+        nome: 'Lazio',
+        punti_fatti: 0,
+        falli_subiti: 0
+    },
+    {
+        nome: 'Juventus',
+        punti_fatti: 0,
+        falli_subiti: 0
+    }
+];
+console.log('array squadre:', squadre);
+
+//creo array vuoto in cui pushare nuovi oggetti
+//creo ciclo for per iterare gli oggetti nell' array
+
+const arrayDaStampare = [];
+
+for (let i = 0; i < squadre.length; i++){
+    let thisSquadra = squadre[i];
+    //console.log(thisSquadra);
+
+    //con la funzione assegno numeri random a punti fatti
+    thisSquadra.punti_fatti = getRandomInt(1, 100);
+
+    //con la funzione assegno numeri random a falli subiti
+    thisSquadra.falli_subiti = getRandomInt(1, 50);
+
+    //console.log(thisSquadra);
+
+    //destrutturo gli oggetti dell' array
+    const {nome, falli_subiti} = thisSquadra;
+    //console.log(nome);
+    //console.log(falli_subiti);
+
+    //creo nuovi oggetti con solo nome e falli subiti come proprietà
+    const squadreDaStampare = {
+        nome: nome,
+        falli_subiti: falli_subiti
+    };
+    //console.log(squadreDaStampare);
+    
+    arrayDaStampare.push(squadreDaStampare);
+
+}
+
+console.log('array da stampare', arrayDaStampare);
+
+
+//destrutturo arrayDaStampare
+
+const [a, b, c, d] = arrayDaStampare;
+console.log(a);
+console.log(b);
+console.log(c);
+console.log(d);
+
+//stampo con template literal
+const caratteristicheSquadre = `
+        <ul>
+            <li> nome: ${a.nome}</li>
+            <li> falli subiti: ${a.falli_subiti}</li>
+        </ul>
+
+        <ul>
+            <li> nome: ${b.nome}</li>
+            <li> falli subiti: ${b.falli_subiti}</li>
+        </ul>
+
+        <ul>
+            <li> nome: ${c.nome}</li>
+            <li> falli subiti: ${c.falli_subiti}</li>
+        </ul>
+
+        <ul>
+            <li> nome: ${d.nome}</li>
+            <li> falli subiti: ${d.falli_subiti}</li>
+        </ul>
+
+`;
+
+document.getElementById('squadre').innerHTML = caratteristicheSquadre;
+
+
+
+//funzione che genera numeri random
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
